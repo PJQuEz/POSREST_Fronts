@@ -1,0 +1,20 @@
+.style-guide-container {
+  padding: 25px;
+}
+
+.status-card--container {
+  display: flex;
+  .status-card {
+    margin: 0 14px;
+    width: 33.33%;
+
+    .status-card--icon {
+        &.orange  {
+          background-color: #F60;
+        }
+        &.blue  {
+          background-color: #26c6da;
+        }
+    }
+  }
+}
