@@ -7,13 +7,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
 import {DndModule} from 'ng2-dnd';
 
+import { provideAuth, AuthHttp, AuthConfig } from 'angular2-jwt';
+import { Http, RequestOptions } from '@angular/http';
+import { AppConfig } from './app.config';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { InputDialogComponent } from './dialog/input-dialog/input-dialog.component';
 
 import { ManageComponent } from './manage/manage.component';
 import { StyleGuideComponent } from './style-guide/style-guide.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
 
+export function getAuthHttp(http) {
+  return new AuthHttp(new AuthConfig({
+    headerPrefix: 'Bearer',
+    noJwtError: true,
+    globalHeaders: [{'Accept': 'application/json'}],
+    tokenGetter: (() => localStorage.getItem('id_token') || ''),
+  }), http);
+}
 
 @NgModule({
   declarations: [
@@ -21,7 +34,8 @@ import { StyleGuideComponent } from './style-guide/style-guide.component';
     HomeComponent,
     InputDialogComponent,
     ManageComponent,
-    StyleGuideComponent
+    StyleGuideComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +46,16 @@ import { StyleGuideComponent } from './style-guide/style-guide.component';
     AppRoutingModule,
     DndModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'AppConfig',
+      useValue: AppConfig
+    },
+    {
+      provide: AuthHttp,
+      useFactory: getAuthHttp,
+      deps: [Http, RequestOptions]
+    }],
   entryComponents: [
     InputDialogComponent
   ],

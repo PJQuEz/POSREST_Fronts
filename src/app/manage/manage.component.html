@@ -1,5 +1,54 @@
 <div class="container">
+  <md-list>
+    <h1 md-subheader>
+      <md-icon>add</md-icon> Add Menu
+    </h1>
+  </md-list>
+  <hr>
+  <br>
+  <md-select placeholder="Type">
+    <md-option *ngFor="let food of foods" [value]="food.value">
+      {{ food.viewValue }}
+    </md-option>
+  </md-select>
+  <br>
+  <md-input-container>
+    <input mdInput placeholder="Name" value="" type="text">
+  </md-input-container>
+
+<div class="row">
+  <div class="col-sm-3 ">
+    <div class="panel panel-success">
+      <div class="panel-heading ">Available products</div>
+      <div dnd-droppable (onDropSuccess)="addToBasket($event)" [dropZones]="['demo2']" class="panel-body test">
+        <div *ngFor="let product of availableProducts" class="panel panel-default " dnd-draggable [dragData]="product" (onDragSuccess)="orderedProduct($event)"
+          [dropZones]="['demo1']">
+          <div class="panel-body">
+            {{product.name}} - {{product.type}}- \${{product.cost}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3 ">
+    <div dnd-droppable (onDropSuccess)="addToBack($event)" [dropZones]="['demo1']" class="panel panel-info">
+      <div class="panel-heading">Shopping Basket &nbsp; (to pay: \${{totalCost()}})
+      </div>
+      <div class="panel-body test">
+        <div dnd-draggable [dragEnabled]="true" [dragData]="product" [dropZones]="['demo2']" (onDragSuccess)="backProduct($event)"
+          *ngFor="let product of shoppingBasket" class="panel panel-default">
+          <div class="panel-body">
+            {{product.name}}<br>(Amount: {{product.quantity}}<br>Cost: \${{product.cost * product.quantity}})
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <md-input-container>
-  <input mdInput placeholder="Favorite food" value="" type="month">
-</md-input-container>
+    <!--<input *ngIf="options.action === 'add'" mdInput placeholder="Name" value="" type="text">-->
+  </md-input-container>
+
+
 </div>
