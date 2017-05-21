@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { InputDialogComponent } from './dialog/input-dialog/input-dialog.component';
 import { StyleGuideComponent } from './style-guide/style-guide.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     InputDialogComponent,
-    StyleGuideComponent
+    StyleGuideComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,
