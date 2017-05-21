@@ -1,0 +1,50 @@
+md-card.mat-card.super-card {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    .super-card {
+        &--header {
+            .cover {
+                margin-top: -48px;
+                width: 100%;
+                min-height: 200px;
+                background-color: #333;
+                border-radius: 3px;
+                box-shadow: 0 12px 20px -10px rgba(156, 39, 176, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(156, 39, 176, 0.2);
+                transition: all 0.3s ease-out;
+                // &:hover {
+                //     margin-top: -96px;
+                // }
+            }
+        }
+        &--tools {}
+        &--content {
+          padding: 24px 0;
+          text-align: center;
+          border-bottom: 1px solid #DDD;
+          .title {
+            text-decoration: none;
+            font-size: 18px;
+            color: #666;
+            &:hover {
+              color: #333;
+            }
+          }
+          .content {
+            color: #999;
+          }
+        }
+        &--footer {
+            display: inline-flex;
+            vertical-align: middle;
+            padding-top: 24px;
+            font-size: 14px;
+            color: #AAA;
+            .mat-icon {
+                margin-right: 5px;
+                width: 16px;
+                height: 16px;
+                font-size: 16px;
+                color: #666;
+            }
+        }
+    }
+}
