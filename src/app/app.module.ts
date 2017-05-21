@@ -10,14 +10,18 @@ import {DndModule} from 'ng2-dnd';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { InputDialogComponent } from './dialog/input-dialog/input-dialog.component';
+
 import { ManageComponent } from './manage/manage.component';
+import { StyleGuideComponent } from './style-guide/style-guide.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     InputDialogComponent,
-    ManageComponent
+    ManageComponent,
+    StyleGuideComponent
   ],
   imports: [
     BrowserModule,

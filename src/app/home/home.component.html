@@ -1,19 +1,8 @@
-<md-card>
-<md-card-title>
-  home works!
-</md-card-title>
-<md-card-subtitle>
-  yy
-  </md-card-subtitle>
-  <md-card-content>.
-
-  .test.
-  
-</md-card-content>
-</md-card>
 
 <button (click)="openDialog()">OPEN</button>
-
+<md-input-container>
+  <input mdInput placeholder="Favorite food" value="Sushi" type="email">
+</md-input-container>
 <div class="container-fluid">
 <h4>Drag-and-Drop - Shopping basket</h4>
 <div class="row">
@@ -48,3 +37,23 @@
 </div>
 
 
+<div class="style-guide-container">
+  <hr>
+
+  <div class="status-card--container">
+    <md-card class="status-card orange" >
+      <div class="status-card--icon {{ class }}">
+        <md-icon>home</md-icon>
+      </div>
+      <div class="status-card--header">
+        <span class="title">Used Space</span>
+        <h1 class="detail">49/50 <small>GB</small></h1>
+      </div>
+      <div class="status-card--footer">
+        <md-icon>warning</md-icon>  Get More Space...
+      </div>
+    </md-card>
+  </div>
+
+  <hr>
+</div>
