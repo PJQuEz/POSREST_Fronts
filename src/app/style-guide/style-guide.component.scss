@@ -4,6 +4,7 @@
 
 .status-card--container {
   display: flex;
+  padding: 48px 0;
   .status-card {
     margin: 0 14px;
     width: 33.33%;
@@ -16,5 +17,15 @@
           background-color: #26c6da;
         }
     }
+  }
+}
+
+
+.super-card--container {
+  display: flex;
+  padding: 48px 0;
+  .super-card {
+    margin: 0 14px;
+    width: 33.33%;
   }
 }
