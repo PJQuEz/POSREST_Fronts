@@ -1,0 +1,54 @@
+md-card.mat-card.status-card {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    .status-card {
+        &--icon {
+            position: absolute;
+            top: -24px;
+            left: 24px;
+            border-radius: 3px;
+            padding: 15px;
+            width: 56px;
+            height: 56px;
+            color: #FFFFFF;
+            background-color: #333;
+            box-shadow: 0 12px 20px -10px rgba(255, 152, 0, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(255, 152, 0, 0.2);
+            .mat-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 56px;
+            }
+        }
+        &--header {
+            margin-top: -12px;
+            padding: 0 0 12px 100px;
+            min-height: 56px;
+            text-align: right;
+            border-bottom: 1px solid #DDD;
+            .title {
+                font-size: 12px;
+                opacity: 0.5;
+            }
+            .detail {
+                margin: 0;
+                font-weight: normal;
+                small {
+                    opacity: 0.75;
+                }
+            }
+        }
+        &--footer {
+            display: inline-flex;
+            vertical-align: middle;
+            padding-top: 24px;
+            font-size: 14px;
+            color: #AAA;
+            .mat-icon {
+                margin-right: 5px;
+                width: 16px;
+                height: 16px;
+                font-size: 16px;
+                color: #666;
+            }
+        }
+    }
+}

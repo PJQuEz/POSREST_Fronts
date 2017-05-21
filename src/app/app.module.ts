@@ -9,12 +9,14 @@ import { MaterialModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { InputDialogComponent } from './dialog/input-dialog/input-dialog.component';
+import { StyleGuideComponent } from './style-guide/style-guide.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    InputDialogComponent
+    InputDialogComponent,
+    StyleGuideComponent
   ],
   imports: [
     BrowserModule,
