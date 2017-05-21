@@ -1,4 +1,50 @@
-<p>
+<md-card>
+<md-card-title>
   home works!
-</p>
+</md-card-title>
+<md-card-subtitle>
+  yy
+  </md-card-subtitle>
+  <md-card-content>.
+
+  .test.
+  
+</md-card-content>
+</md-card>
+
 <button (click)="openDialog()">OPEN</button>
+
+<div class="container-fluid">
+<h4>Drag-and-Drop - Shopping basket</h4>
+<div class="row">
+
+  <div class="col-sm-3 ">
+    <div class="panel panel-success">
+      <div class="panel-heading ">Available products</div>
+      <div dnd-droppable (onDropSuccess)="addToBasket($event)" [dropZones]="['demo2']" class="panel-body test">
+        <div *ngFor="let product of availableProducts" class="panel panel-default " dnd-draggable [dragData]="product" (onDragSuccess)="orderedProduct($event)"
+          [dropZones]="['demo1']">
+          <div class="panel-body">
+            {{product.name}} - {{product.type}}- \${{product.cost}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3 ">
+    <div dnd-droppable (onDropSuccess)="addToBack($event)" [dropZones]="['demo1']" class="panel panel-info">
+      <div class="panel-heading">Shopping Basket &nbsp; (to pay: \${{totalCost()}})
+      </div>
+      <div class="panel-body test">
+        <div dnd-draggable [dragEnabled]="true" [dragData]="product" [dropZones]="['demo2']" (onDragSuccess)="backProduct($event)"
+          *ngFor="let product of shoppingBasket" class="panel panel-default">
+          <div class="panel-body">
+            {{product.name}}<br>(Amount: {{product.quantity}}<br>Cost: \${{product.cost * product.quantity}})
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
