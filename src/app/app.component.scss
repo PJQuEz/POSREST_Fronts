@@ -1,0 +1,25 @@
+.home-container {
+  width: 100%;
+  height: 100vh;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.home-container md-sidenav {
+  width: 300px;
+}
+
+.home-container .mat-sidenav-content,
+.home-container md-sidenav {
+  display: flex;
+  overflow: visible;
+}
+
+.router-container {
+  overflow: auto;
+}
+
+.home-fab {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
