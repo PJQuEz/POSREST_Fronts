@@ -1,3 +1,48 @@
-.container{
-    padding: 25px;
+.container {
+  padding: 25px;
+}
+
+.status-card--container {
+  display: flex;
+  padding: 48px 0;
+  .status-card {
+    margin: 0 14px;
+    width: 33.33%;
+    .status-card--icon {
+      &.orange {
+        background-color: #F60;
+      }
+      &.blue {
+        background-color: #26c6da;
+      }
+    }
+  }
+}
+
+.status-card--footer {
+  height: 300px;
+  width: 100%;
+}
+
+.panel-body {
+    
+  width: 100%;
+}
+.test {
+  margin: 0px 0px 10px 0px;
+  width: 100%;
+  border: 1px solid gray;
+  text-align: center;
+  padding: 10px 0px 10px 0px;
+}
+
+.imggg{
+   margin: 0;
+        height: 130px;
+}
+
+.md-raised{
+        background-color: #26c6da;
+                color: #FFF;
+
 }
