@@ -21,7 +21,7 @@ export class SideNavComponent implements OnInit {
     {
       icon: 'view_week',
       name: 'Another Page',
-      path: '/not-found'
+      path: '/list'
     }
   ];
 

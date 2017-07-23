@@ -1,0 +1,96 @@
+<div class="container">
+  <md-list>
+    <h1 md-subheader>
+      <md-icon>add</md-icon> Add Menu
+    </h1>
+  </md-list>
+  <hr>
+  <br>
+  <md-select placeholder="Type" [(ngModel)]="p.type">
+    <md-option *ngFor="let food of foods" [value]="food.value">
+      {{ food.viewValue }}
+    </md-option>
+  </md-select>
+  &nbsp;
+  <md-input-container *ngIf="p.type">
+    <input mdInput placeholder="Name" [(ngModel)]="p.name" type="text">
+  </md-input-container>
+  &nbsp;
+  <md-input-container *ngIf="p.type=='non brewing'">
+    <input mdInput placeholder="Sale price" [value]="" type="text">
+  </md-input-container>
+  <br>
+  <input type="file" *ngIf="p.type">
+  <md-card [style.width.px]="'300'" class="imggg" *ngIf="p.type">
+    <img md-card-image *ngIf="Imggg" [src]="'http://139.59.231.135/map/public/images/' + Imggg.fileName">
+  </md-card>
+  <button *ngIf="Imggg" md-button (click)="deletePic(Imggg.id)" class="md-raised md-primary">X</button>
+
+
+  <div *ngIf="p.type=='brewing'">
+    <div class="status-card--container">
+      <md-card class="status-card">
+        <div class="status-card--icon orange">
+          <md-icon>menu</md-icon>
+        </div>
+        <div class="status-card--header">
+          <h1 class="detail">Materail</h1>
+        </div>
+        <div class="status-card--footer" dnd-droppable (onDropSuccess)="addToBasket($event)" [dropZones]="['demo2']">
+          <div class="panel-body">
+            <div *ngFor="let product of availableProducts" class="panel panel-default " dnd-draggable [dragData]="product" (onDragSuccess)="orderedProduct($event)"
+              [dropZones]="['demo1']">
+              <div class="test">
+                {{product.name}} ({{product.type}}) \${{product.cost}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </md-card>
+
+      <md-card class="status-card">
+        <div class="status-card--icon blue">
+          <md-icon>restaurant_menu</md-icon>
+        </div>
+        <div class="status-card--header">
+          <span class="title">Menu name</span>
+          <h1 class="detail">{{p.name}}</h1>
+        </div>
+        <div class="status-card--footer" dnd-droppable (onDropSuccess)="addToBack($event)" [dropZones]="['demo1']">
+          <div class="panel-body">
+            <div dnd-draggable [dragEnabled]="true" [dragData]="product" [dropZones]="['demo2']" (onDragSuccess)="backProduct($event)"
+              *ngFor="let product of shoppingBasket" class="panel panel-default">
+              <div class="test">
+                {{product.name}} ({{product.type}}) (Amount: {{product.quantity}} Cost: \${{product.cost * product.quantity}})
+              </div>
+            </div>
+          </div>
+        </div>
+      </md-card>
+    </div>
+  </div>
+
+    <div >
+      Normal Cost : {{ nCost }} &nbsp;{{ tCost }}
+      <md-input-container>
+        <input mdInput placeholder="Sale price" [value]="" type="text">
+      </md-input-container>
+    </div>
+    <div >
+      High Cost : {{hCost}} &nbsp;
+      <md-input-container>
+        <input mdInput placeholder="Sale price" [value]="" type="text">
+      </md-input-container>
+    </div>
+    <div >
+      Premium Cost : {{pCost}} &nbsp;
+      <md-input-container>
+        <input mdInput placeholder="Sale price" [value]="" type="text">
+      </md-input-container>
+    </div>
+  <br>
+  <button *ngIf="p.type" md-button class="md-raised md-primary"  (click)="test()">Add</button>
+  <!-- <input type="file" accept="image/*" capture="camera">
+  <img id='barcode' src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=500x500" alt="" title="HELLO"
+    width="500" height="500" /> -->
+</div>

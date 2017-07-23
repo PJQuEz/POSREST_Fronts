@@ -1,100 +1,153 @@
-import { Component, OnInit } from '@angular/core';
-import * as _ from 'lodash';
+import { Component, OnInit, Input, Inject, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Router, Params, ActivatedRoute } from '@angular/router';
+import { FormGroup } from '@angular/forms';
+import * as _ from "lodash";
+
+
+
+
+
 
 @Component({
   selector: 'app-manage',
   templateUrl: './manage.component.html',
-  styleUrls: ['./manage.component.scss']
+  styleUrls: ['./manage.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class ManageComponent implements OnInit {
-  foods = [
-    { value: 'brewing', viewValue: 'Brewing' },
-    { value: 'non brewing', viewValue: 'Non-brewing' }
-  ];
-  p = {
-    'name': '',
-    'type': '',
-    'pic':''
-  };
-  availableProducts: Array<Product> = [];
-  shoppingBasket: Array<Product2> = [];
 
-  constructor() {
-    this.availableProducts.push(new Product('Blue Shoes', 'normal', 35));
-    this.availableProducts.push(new Product('Good Jacket', 'high', 90));
-    this.availableProducts.push(new Product('Red Shirt', 'premium', 12));
-    this.availableProducts.push(new Product('Blue Jeans', 'normal', 60));
-  }
+export class ManageComponent implements OnInit {
+  @Input() options;
+  @Input() Troute;
+  @Input() Imggg;
+  @Input() detail: any;
+  formManage: FormGroup;
+  p = {
+    'value':''
+  };
+  imgg: any;
+
+  @Output() addEvent = new EventEmitter<any>();
+  @Output() editEvent = new EventEmitter<any>();
+  @Output() changeEvent = new EventEmitter<any>();
+
+
+  constructor(
+    @Inject('AppConfig') 
+    private config: any, 
+    private route: ActivatedRoute,
+    private router: Router
+
+    ) { }
 
   ngOnInit() {
+     
+    this.setupForm();
+    this.qq = this.Troute;
+    
   }
-
-
-
-  orderedProduct(event: any) {
-    // let test = _.remove(this.availableProducts, (n) => {
-    //     return n.name == event.dragData.name;
-    // });
-  }
-
-
-  backProduct(event: any) {
-    // let test = _.remove(this.shoppingBasket, (n) => {
-    //     return n.name == event.dragData.name;
-    // });
-  }
-
-
-  addToBack($event: any) {
-    let newProduct: Product2 = $event.dragData;
-    let answer = prompt('Hello');
-    let num1 = parseInt(answer);
-    if (answer) {
-      console.log(num1)
-      this.shoppingBasket.push(new Product2(newProduct.name, newProduct.type, newProduct.cost, num1));
-      this.shoppingBasket.sort((a: Product2, b: Product2) => {
-        return a.name.localeCompare(b.name);
-      });
-      console.log(this.shoppingBasket)
-      
-      let test = _.remove(this.availableProducts, (n) => {
-        return n.name == $event.dragData.name;
-      });
-    }
-  }
-
-  addToBasket($event: any) {
-    let newProduct: Product = $event.dragData;
-    let answers = prompt('test');
-    if (answers) {
-      this.availableProducts.push(new Product(newProduct.name, newProduct.type, newProduct.cost));
-      this.availableProducts.sort((a: Product, b: Product) => {
-        return a.name.localeCompare(b.name);
-      });
-      let test = _.remove(this.shoppingBasket, (n) => {
-        return n.name == $event.dragData.name;
-      });
-    }
-  }
-
-  normalCost(): number {
-    let cost: number = 0;
-    for (let indx in this.shoppingBasket) {
-      let product2: Product2 = this.shoppingBasket[indx];
-      if(product2.type=='normal'){
-      cost += (product2.cost * product2.quantity);
+  
+  setupForm() {
+    this.formManage = new FormGroup({});
+    this.options.params.forEach((p) => {
+      if( p.type === 'file' ) {
+        return;
       }
-    }
-    return cost;
+
+      this.formManage.addControl(p.name, p.control);
+    });
   }
 
 
+  
+  edit() {
+   let objResult = this.getParameters(); 
+    this.editEvent.emit({
+      'parameters': objResult
+    });
+  }
+
+  result(){
+
+      _.forEach({ 'a': 1, 'b': 2 }, 
+        (value, key) => {
+          console.log(key);
+        })
+  
+  }
+
+  getParameters() {
+
+    let objResult = {};
+    if(this.options.type==='place'||this.options.type==='station') {
+        objResult['user_id'] = [];
+      }
+    else if(this.options.type==='route') {
+        objResult['stations'] = [];
+        objResult['places'] = [];
+
+      }
+    else if(this.options.type==='course'&& this.options.action==='add') {
+        this.route.params.forEach((param: Params) => {
+        objResult['userId']  = param['id'];
+          })
+      }
+     _.forEach( this.options.params, (value) => {
+       // this.options.params.name = key; 
+       // this.options.params.value = value.value; 
+          // console.log('key: ' + key + ' | value: ' + value);
+           if(value.prop==='routes') {
+              objResult[value.prop] = this.qq;
+              // objResult[value.prop].push(value.value)
+           } 
+           else if(value.prop==='qq'){
+
+           }
+           else {
+              objResult[value.prop] = value.value;
+
+           }
+          // console.log(value);
+        });
+    
+      // if(this.options.type==='place') {
+      //   objResult['routes'] = [];
+      // }
+     return objResult;
+  }
+  test(){
+    // console.log('aa');
+     // this.getimgg(this.Imggg)
+      console.log(this.Imggg)
+      // console.log(this.imgg)
+
+
+    console.log(this.getParameters());
+  }
+  add() {
+    let objResult = this.getParameters(); 
+    this.addEvent.emit({
+      'parameters': objResult
+    });
+  }
+  qq =[];
+  yy =[];
+  onChange(deviceValue) {
+    console.log(deviceValue);
+    if(deviceValue !== '') {
+     if(this.qq.indexOf(deviceValue)!= -1){
+       let s = this.qq.indexOf(deviceValue);
+          this.qq.splice(s, 1);
+     }
+     else{
+          this.qq.push(deviceValue);
+     }
+    }
+}
+onChange2(deviceValue) {
+    console.log(deviceValue);
+      this.changeEvent.emit({
+      'parameters': deviceValue
+    });
 }
 
-class Product {
-  constructor(public name: string, public type: string, public cost: number) { }
-}
-
-class Product2 {
-  constructor(public name: string, public type: string, public cost: number, public quantity: number) { }
 }

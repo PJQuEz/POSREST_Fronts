@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
-import {DndModule} from 'ng2-dnd';
+import { DndModule } from 'ng2-dnd';
 
 import { provideAuth, AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
@@ -18,6 +18,9 @@ import { InputDialogComponent } from './dialog/input-dialog/input-dialog.compone
 import { ManageComponent } from './manage/manage.component';
 import { StyleGuideComponent } from './style-guide/style-guide.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
+import { ManageMenuComponent } from './manage-menu/manage-menu.component';
+import { ListComponent } from './list/list.component';
+import { ListMenuComponent } from './list-menu/list-menu.component';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -35,7 +38,10 @@ export function getAuthHttp(http) {
     InputDialogComponent,
     ManageComponent,
     StyleGuideComponent,
-    SideNavComponent
+    SideNavComponent,
+    ManageMenuComponent,
+    ListComponent,
+    ListMenuComponent
   ],
   imports: [
     BrowserModule,
