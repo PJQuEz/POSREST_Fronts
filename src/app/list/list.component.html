@@ -1,0 +1,53 @@
+<div class="body-content">
+  <h2 > Manage {{options.title}}</h2>
+
+  
+  <div class="list">
+  <div class="title">
+   
+      <button md-raised-button color="primary" [routerLink]="['add']"><i class="material-icons">add</i></button> 
+
+        
+  </div>
+
+    <!-- Begin PlaceList,MemberList -->
+    <table>
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th *ngFor="let header of options.params.headers" [style.width.px]="header.maxWidth">
+            {{header.name}}
+          </th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="row" *ngFor="let detail of details ; let i=index">
+          <td>{{ i+1 }} </td>
+          <td *ngFor="let header of options.params.headers">
+            <div *ngIf=" header.type === 'image' ">
+              <md-card class="place-img" *ngFor="let image of detail.images">
+                <a href="/place/detail/{{detail.id}}"><img md-card-image [src]="'http://139.59.231.135/map/public/images/' + image['fileName']"></a>
+              </md-card>
+            </div>
+            <div *ngIf=" header.type === 'text' ">
+              {{ detail[header.prop] }}
+            </div>
+ 
+            <div *ngIf=" header.type === 'routes' && detail.bus_routes.length == 0 ">
+              {{ detail[header.prop] }}
+              </div>
+            <div *ngIf=" header.type === 'routes' && detail.bus_routes.length != 0 ">
+              {{ getbr(detail.bus_routes) }}
+            </div>
+
+          </td>
+          <td><button md-raised-button [routerLink]="['edit',detail.id]"><i class="material-icons">edit</i></button></td>
+          <td><button md-raised-button (click)="delete(detail.id)" color="warn"><i class="material-icons">delete</i></button></td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- End PlaceList,MemberList -->
+  </div>
+</div>
